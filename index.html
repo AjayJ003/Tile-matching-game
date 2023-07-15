@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Sliding Webpage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sofia&display=swap" rel="stylesheet">
+  <style>
+    /*button*/
+    button{
+        padding: 25px 50px;
+        font-family: 'GOS', Courier, monospace;
+        font-size: 15px;
+        border-radius: 10px;
+        box-shadow: 4px 4px gray;
+        transition-duration: 1s;
+        color: black;
+        background-color: aqua;
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+
+    button:hover{
+        padding: 35px 85px;
+        color: white;
+        background-color: lightslategrey;
+    }
+
+    /* Styles for the outer container*/
+    .outer_container {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+    .button{
+        display: flex;
+        justify-content: center;
+    }
+    /* Styles for the sliding container */
+    .sliding-container {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+        
+      border-radius: 25px;
+
+    }
+
+    /* Styles for the sliding content */
+    .sliding-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      
+    }
+
+    /* Styles for individual slides */
+    .slide {
+      width: 100vh;
+      height: 100vh;
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 24px;
+      color: white;
+      font-family: 'Sofia', Courier, monospace;
+    }
+
+    /* Slide background colors */
+    .slide:nth-child(1) { background-color: #ff5252; }
+    .slide:nth-child(2) { background-color: #3f51b5; }
+    .slide:nth-child(3) { background-color: #4caf50; }
+
+    /* Navigation buttons */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 10px;
+      border-radius: 50%;
+      color: black;
+      cursor: pointer;
+      box-shadow: 4px 4px gray;
+
+    }
+
+    .nav-btn-prev { left: 15px; }
+    .nav-btn-next { right: 15px; }
+    
+  </style>
+</head>
+<body>
+<div class="outer_container">
+  <div class="sliding-container">
+    <div class="sliding-content">
+      <div class="slide">
+        <p>1.This is a Tile - Matching Game.</p>
+        <p>2.This game has a timer which is of 45 seconds.</p>
+        <p>3.This game contains 4x4 and 6x6 tile - matching playboard.</p>
+        <p>4.This game contains 3 level {easy,medium,difficult}.</p>
+        <p>5.This game has four function namely {start,reset,pause & load}.</p>
+      </div>
+      <div class="slide">
+        <p>6.This game also has a leaderboard.</p>
+        <p>7.The easy mode is normal 4x4 tile - matching with a freeze and bonus card option.</p>
+        <p>8.Same as, the easy mode but plot twist is if the two power cards do match, they are </p>
+        <p>turned back over, and gets shuffled up and the player moves on to the next turn.</p>
+      </div>
+      <div class="slide">
+        <p>9.Same as, the easy mode but plot twist is if the two cards do not match, they are </p>
+        <p>turned back over, and gets shuffled up and the player moves on to the next turn.</p>
+        <p>10.Freeze card freeze the time for 10 seconds and bonus card adds 5 points to the score.</p>
+        <p>11.Start,reset,pause and load does there works as the name suggests.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-btn nav-btn-prev">&lt;</div>
+  <div class="nav-btn nav-btn-next">&gt;</div>
+  <div class="button">
+    <button><a href="tilematching.html">Play</a></button>
+  </div>
+
+</div>
+
+  <script>
+    const slidingContainer = document.querySelector('.sliding-container');
+    const slidingContent = document.querySelector('.sliding-content');
+    const navBtnPrev = document.querySelector('.nav-btn-prev');
+    const navBtnNext = document.querySelector('.nav-btn-next');
+    const slideWidth = slidingContainer.offsetWidth;
+
+    let currentPosition = 0;
+
+    // Function to slide to the previous content
+    const slideToPrev = () => {
+      currentPosition += slideWidth;
+      if (currentPosition > 0) currentPosition = -(slideWidth * 2);
+      slidingContent.style.transform = `translateX(${currentPosition}px)`;
+    };
+
+    // Function to slide to the next content
+    const slideToNext = () => {
+      currentPosition -= slideWidth;
+      if (currentPosition < -(slideWidth * 2)) currentPosition = 0;
+      slidingContent.style.transform = `translateX(${currentPosition}px)`;
+    };
+
+    // Event listeners for navigation buttons
+    navBtnPrev.addEventListener('click', slideToPrev);
+    navBtnNext.addEventListener('click', slideToNext);
+  </script>
+</body>
+</html>
